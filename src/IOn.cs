@@ -20,6 +20,22 @@ namespace DCFApixels.DragonECS
     }
     public static class RecursivityOnExt
     {
+        public static EcsPipeline.Builder AddOn<T>(this EcsPipeline.Builder b, int maxLoops = -1)
+            where T : struct, IEcsComponent
+        {
+            return b.AddOn<T, EcsWorld>(maxLoops, null);
+        }
+        public static EcsPipeline.Builder AddOn<T>(this EcsPipeline.Builder b, string layer)
+            where T : struct, IEcsComponent
+        {
+            return b.AddOn<T, EcsWorld>(-1, layer);
+        }
+        public static EcsPipeline.Builder AddOn<T>(this EcsPipeline.Builder b, int maxLoops, string layer)
+            where T : struct, IEcsComponent
+        {
+            return b.AddOn<T, EcsWorld>(maxLoops, layer);
+        }
+
         public static EcsPipeline.Builder AddOn<T, TWorld>(this EcsPipeline.Builder b, int maxLoops = -1)
             where T : struct, IEcsComponent
             where TWorld : EcsWorld
@@ -42,6 +58,22 @@ namespace DCFApixels.DragonECS
     }
     public static class RecursivityTagOnExt
     {
+        public static EcsPipeline.Builder AddOn<T>(this EcsPipeline.Builder b, int maxLoops = -1)
+            where T : struct, IEcsTagComponent
+        {
+            return b.AddOn<T, EcsWorld>(maxLoops, null);
+        }
+        public static EcsPipeline.Builder AddOn<T>(this EcsPipeline.Builder b, string layer)
+            where T : struct, IEcsTagComponent
+        {
+            return b.AddOn<T, EcsWorld>(-1, layer);
+        }
+        public static EcsPipeline.Builder AddOn<T>(this EcsPipeline.Builder b, int maxLoops, string layer)
+            where T : struct, IEcsTagComponent
+        {
+            return b.AddOn<T, EcsWorld>(maxLoops, layer);
+        }
+
         public static EcsPipeline.Builder AddOn<T, TWorld>(this EcsPipeline.Builder b, int maxLoops = -1)
             where T : struct, IEcsTagComponent
             where TWorld : EcsWorld
