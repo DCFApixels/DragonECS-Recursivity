@@ -1,4 +1,4 @@
-﻿namespace DCFApixels.DragonECS.Recursivity.Internal
+﻿namespace DCFApixels.DragonECS.Recursivity
 {
     public static class EcsRecursivityConsts
     {

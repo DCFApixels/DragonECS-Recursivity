@@ -68,7 +68,7 @@
         }
         public void Import(EcsPipeline.Builder b)
         {
-            b.Layers.InsertAfter(BASIC_LAYER);
+            b.Layers.InsertAfter(BASIC_LAYER, RECURSIVE_LAYER);
             b.Add(this);
         }
     }
