@@ -9,7 +9,7 @@
 <a href="http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=IbDcH43vhfArb30luGMP1TMXB3GCHzxm&authKey=s%2FJfqvv46PswFq68irnGhkLrMR6y9tf%2FUn2mogYizSOGiS%2BmB%2B8Ar9I%2Fnr%2Bs4oS%2B&noverify=0&group_code=949562781"><img alt="QQ" src="https://img.shields.io/badge/QQ-JOIN-00b269?logo=tencentqq&logoColor=%23ffffff&style=for-the-badge"></a>
 </p>
 
-# Recursivity for [DragonECS](https://github.com/DCFApixels/DragonECS)
+# Recursivity для [DragonECS](https://github.com/DCFApixels/DragonECS)
 
 <table>
   <tr></tr>

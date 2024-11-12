@@ -37,7 +37,9 @@
 
 Simplifies event handling by stimulating recursive behavior, but works within the standard ECS flow. It ensures that events, which need to be processed within a single frame, are handled by all systems exactly once, regardless of where they originate.
 
-> **NOTICE:** The project is a work in progress, API may change.  
+> [!WARNING]
+> The project is a work in progress, API may change.
+>
 > While the English version of the README is incomplete, you can view the [Russian version](https://github.com/DCFApixels/DragonECS-Recursivity/blob/main/README-RU.md).
 
 
