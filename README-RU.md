@@ -73,6 +73,7 @@ https://github.com/DCFApixels/DragonECS-Recursivity.git
 
 # Инициализация
 Для обработки событий используется процесс `IOn<T>.ToRun()` где `T` это тип компонента-события. Процесс `IOn<T>.ToRun()` контролирует специальная система, которую необходимо инициализировать в пайплайне.
+
 ``` c#
 _world = new EcsDefaultWorld();
 _pipeline = EcsPipeline.New()
@@ -87,6 +88,8 @@ _pipeline = EcsPipeline.New()
     .Inject(_world)
     .BuildAndInit();
 ```
+
+> За запуск всех систем которые выполняются рекурсивно, включая управляющих процессом `IOn<T>.ToRun()`, ответственна система рекурсии. По умолчанию система рекурсии добавляется на слой `EcsRecursivityConsts.RECURSIVE_LAYER`, а слой `EcsRecursivityConsts.RECURSIVE_LAYER` вставляется после `EcsConsts.BASIC_LAYER`.
 
 </br>
 
