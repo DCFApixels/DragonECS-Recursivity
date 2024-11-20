@@ -25,7 +25,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
         void IEcsInject<TWorld>.Inject(TWorld obj)
         {
             if (obj == null) { return; }
-            if(_worlds.Length <= _worldsCount)
+            if (_worlds.Length <= _worldsCount)
             {
                 Array.Resize(ref _worlds, _worlds.Length << 1);
             }
@@ -87,7 +87,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
                 }
                 else
                 {
-                    if(_runsCount > 2)
+                    if (_runsCount > 2)
                     {
                         _worlds[i] = _worlds[--_worldsCount];
                     }
