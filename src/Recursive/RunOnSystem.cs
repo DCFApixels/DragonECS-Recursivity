@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DCFApixels.DragonECS.UncheckedCore;
+using System;
 
 namespace DCFApixels.DragonECS.Recursivity.Internal
 {
@@ -36,6 +37,9 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
 
         private IOnRunner<TComponent> _onRunner;
 
+        private int[] _filteredEntities = new int[64];
+        private int _filteredEntitiesCount;
+
         private int _runsCount = 0;
 
         public RunOnSystem(int maxLoops = -1)
@@ -72,7 +76,9 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
 
                 if (world.IsDestroyed == false && world.IsComponentTypeDeclared<TComponent>())
                 {
-                    EcsSpan events = world.Where(out Aspect a);
+                    Aspect a = world.GetAspect<Aspect>();
+                    _filteredEntitiesCount = a.Mask.GetIterator().IterateTo(world.Entities, ref _filteredEntities);
+                    EcsSpan events = UncheckedCoreUtility.CreateSpan(world.ID, _filteredEntities, _filteredEntitiesCount);
 
                     result |= events.Count != 0;
                     using (world.DisableAutoReleaseDelEntBuffer())
