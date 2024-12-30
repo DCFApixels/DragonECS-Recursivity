@@ -15,23 +15,14 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
         where TComponent : struct, IEcsTagComponent
         where TWorld : EcsWorld
     {
-        public EcsPipeline Pipeline { get; set; }
         class Aspect : EcsAspect
         {
             public EcsTagPool<TComponent> values = Inc;
         }
-
+        public EcsPipeline Pipeline { get; set; }
         private EcsWorld[] _worlds = new EcsWorld[4];
         private int _worldsCount;
-        void IEcsInject<TWorld>.Inject(TWorld obj)
-        {
-            if (obj == null) { return; }
-            if (_worlds.Length <= _worldsCount)
-            {
-                Array.Resize(ref _worlds, _worlds.Length << 1);
-            }
-            _worlds[_worldsCount++] = obj;
-        }
+
         private int _maxLoops;
         private int _currentRunLoops;
 
@@ -39,8 +30,6 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
 
         private int[] _filteredEntities = new int[64];
         private int _filteredEntitiesCount;
-
-        private int _runsCount = 0;
 
         public RunOnTagSystem(int maxLoops = -1)
         {
@@ -73,35 +62,45 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
             for (int i = 0; i < _worldsCount; i++)
             {
                 var world = _worlds[i];
+                if (world.IsDestroyed)
+                {
+                    world = _worlds[--_worldsCount];
+                    _worlds[i] = world;
+                }
 
-                if (world.IsDestroyed == false && world.IsComponentTypeDeclared<TComponent>())
+                if (world.IsComponentTypeDeclared<TComponent>())
                 {
                     Aspect a = world.GetAspect<Aspect>();
                     _filteredEntitiesCount = a.Mask.GetIterator().IterateTo(world.Entities, ref _filteredEntities);
                     EcsSpan events = UncheckedCoreUtility.CreateSpan(world.ID, _filteredEntities, _filteredEntitiesCount);
 
-                    result |= events.Count != 0;
-                    using (world.DisableAutoReleaseDelEntBuffer())
+                    if (events.Count > 0)
                     {
-                        _onRunner.ToRun(events);
-                        foreach (var e in events)
+                        result = true;
+                        using (world.DisableAutoReleaseDelEntBuffer())
                         {
-                            a.values.TryDel(e);
+                            _onRunner.ToRun(events);
+                            foreach (var e in events)
+                            {
+                                a.values.TryDel(e);
+                            }
                         }
-                    }
-                    world.ReleaseDelEntityBufferAll();
-                }
-                else
-                {
-                    if (_runsCount > 2)
-                    {
-                        _worlds[i] = _worlds[--_worldsCount];
+                        world.ReleaseDelEntityBufferAll();
                     }
                 }
             }
 
-            _runsCount++;
             return result;
+        }
+
+        void IEcsInject<TWorld>.Inject(TWorld obj)
+        {
+            if (obj == null) { return; }
+            if (_worlds.Length <= _worldsCount)
+            {
+                Array.Resize(ref _worlds, _worlds.Length << 1);
+            }
+            _worlds[_worldsCount++] = obj;
         }
     }
 }
