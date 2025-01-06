@@ -17,7 +17,7 @@
         EcsProcess<IRecursiveRun> _processRun;
         EcsProcess<IRecursiveEnd> _processEnd;
 
-        private int _runVersion = 0;
+        private int _iteration = 0;
         public void Init()
         {
             _processStart = Pipeline.GetProcess<IRecursiveStart>();
@@ -39,15 +39,12 @@
             bool isLoop = false;
             foreach (var system in _processRun)
             {
-                if (system.RecursiveRun(_runVersion))
-                {
-                    isLoop = true;
-                }
+                isLoop |= system.RecursiveRun(_iteration);
             }
-            _runVersion++;
+            _iteration++;
             if (isLoop)
             {
-                if (_runVersion >= CRITICAL_RECURSIVE_COUNT)
+                if (_iteration >= CRITICAL_RECURSIVE_COUNT)
                 {
                     EcsDebug.PrintWarning("The cycle limit was exceeded, the recursive system was stopped to avoid infinite looping.");
                 }
@@ -60,9 +57,9 @@
             {
                 foreach (var system in _processEnd)
                 {
-                    system.RecursiveEnd(_runVersion);
+                    system.RecursiveEnd(_iteration);
                 }
-                _runVersion = 0;
+                _iteration = 0;
             }
 
         }
