@@ -20,7 +20,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
             public EcsPool<TComponent> values = Inc;
         }
         public EcsPipeline Pipeline { get; set; }
-        private EcsWorld[] _worlds = new EcsWorld[4];
+        private TWorld[] _worlds = new TWorld[4];
         private int _worldsCount;
 
         private int _maxLoops;
