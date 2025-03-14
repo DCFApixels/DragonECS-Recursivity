@@ -1,4 +1,8 @@
-﻿namespace DCFApixels.DragonECS.Recursivity.Internal
+﻿#if DISABLE_DEBUG
+#undef DEBUG
+#endif
+
+namespace DCFApixels.DragonECS.Recursivity.Internal
 {
     using static EcsConsts;
     using static EcsRecursivityConsts;

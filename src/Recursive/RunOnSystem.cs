@@ -1,4 +1,7 @@
-﻿using DCFApixels.DragonECS.UncheckedCore;
+﻿#if DISABLE_DEBUG
+#undef DEBUG
+#endif
+using DCFApixels.DragonECS.UncheckedCore;
 using System;
 
 namespace DCFApixels.DragonECS.Recursivity.Internal

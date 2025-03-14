@@ -1,3 +1,6 @@
+#if DISABLE_DEBUG
+#undef DEBUG
+#endif
 using DCFApixels.DragonECS.Recursivity.Internal;
 using DCFApixels.DragonECS.RunnersCore;
 using System;
@@ -100,7 +103,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
 {
     internal class IOnRunner<T> : EcsRunner<IOn<T>>, IOn<T>
     {
-#if DEBUG && !DISABLE_DEBUG
+#if DEBUG
         private EcsProfilerMarker[] _markers;
         protected override void OnSetup()
         {
@@ -113,7 +116,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
 #endif
         public void ToRun(EcsSpan targetEntities)
         {
-#if DEBUG && !DISABLE_DEBUG
+#if DEBUG
             for (int i = 0, n = Process.Length < _markers.Length ? Process.Length : _markers.Length; i < n; i++)
             {
                 _markers[i].Begin();
