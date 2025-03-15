@@ -126,7 +126,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
                 }
                 catch (Exception e)
                 {
-#if DISABLE_CATH_EXCEPTIONS
+#if DRAGONECS_DISABLE_CATH_EXCEPTIONS
                     throw;
 #endif
                     EcsDebug.PrintError(e);
@@ -139,7 +139,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
                 try { item.ToRun(targetEntities); }
                 catch (Exception e)
                 {
-#if DISABLE_CATH_EXCEPTIONS
+#if DRAGONECS_DISABLE_CATH_EXCEPTIONS
                     throw;
 #endif
                     EcsDebug.PrintError(e);
