@@ -114,6 +114,8 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
             }
         }
 #endif
+
+#pragma warning disable CS0162 // Обнаружен недостижимый код
         public void ToRun(EcsSpan targetEntities)
         {
 #if DEBUG
@@ -147,5 +149,6 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
             }
 #endif
         }
+#pragma warning restore CS0162 // Обнаружен недостижимый код
     }
 }
