@@ -10,7 +10,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
     [MetaGroup(EcsRecursivityConsts.PACK_GROUP, SYSTEMS_GROUP)]
     [MetaDescription(AUTHOR, "...")]
     [MetaColor(MetaColor.BlueViolet)]
-    [MetaID("E326771A9301F751DF0272F4E5EBCCCF")]
+    [MetaID("DragonECS_E326771A9301F751DF0272F4E5EBCCCF")]
     internal class RunRecursiveSystem : IEcsInit, IEcsRun, IEcsPipelineMember, IEcsModule, IEcsDefaultAddParams
     {
         AddParams IEcsDefaultAddParams.AddParams => RECURSIVE_LAYER;
