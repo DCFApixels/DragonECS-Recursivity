@@ -1,7 +1,7 @@
 ﻿#if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using DCFApixels.DragonECS.UncheckedCore;
+using DCFApixels.DragonECS.Core.Unchecked;
 using System;
 
 namespace DCFApixels.DragonECS.Recursivity.Internal
@@ -75,7 +75,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
                 {
                     Aspect a = world.GetAspect<Aspect>();
                     _filteredEntitiesCount = a.Mask.GetIterator().IterateTo(world.Entities, ref _filteredEntities);
-                    EcsSpan events = UncheckedCoreUtility.CreateSpan(world.ID, _filteredEntities, _filteredEntitiesCount);
+                    EcsSpan events = UncheckedUtility.CreateSpan(world.ID, _filteredEntities, _filteredEntitiesCount);
 
                     if (events.Count > 0)
                     {
