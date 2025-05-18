@@ -69,7 +69,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
         }
         public void Import(EcsPipeline.Builder b)
         {
-            b.Layers.InsertAfter(BASIC_LAYER, RECURSIVE_LAYER);
+            b.Layers.Add(RECURSIVE_LAYER).After(BASIC_LAYER);
             b.Add(this);
         }
     }
