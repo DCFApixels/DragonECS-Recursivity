@@ -74,7 +74,7 @@ namespace DCFApixels.DragonECS.Recursivity.Internal
                 if (world.IsComponentTypeDeclared<TComponent>())
                 {
                     Aspect a = world.GetAspect<Aspect>();
-                    _filteredEntitiesCount = a.Mask.GetIterator().IterateTo(world.Entities, ref _filteredEntities);
+                    _filteredEntitiesCount = a.Mask.GetIterator().CacheTo(world.Entities, ref _filteredEntities);
                     EcsSpan events = UncheckedUtility.CreateSpan(world.ID, _filteredEntities, _filteredEntitiesCount);
 
                     if (events.Count > 0)
