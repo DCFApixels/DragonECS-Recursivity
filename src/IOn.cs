@@ -2,7 +2,7 @@
 #undef DEBUG
 #endif
 using DCFApixels.DragonECS.Recursivity.Internal;
-using DCFApixels.DragonECS.RunnersCore;
+using DCFApixels.DragonECS.Core;
 using System;
 
 namespace DCFApixels.DragonECS
