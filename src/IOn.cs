@@ -1,14 +1,16 @@
 #if DISABLE_DEBUG
 #undef DEBUG
 #endif
-using DCFApixels.DragonECS.Recursivity.Internal;
 using DCFApixels.DragonECS.Core;
+using DCFApixels.DragonECS.Recursivity;
+using DCFApixels.DragonECS.Recursivity.Internal;
 using System;
 
 namespace DCFApixels.DragonECS
 {
     [MetaName("On")]
     [MetaColor(MetaColor.BlueViolet)]
+    [MetaGroup(EcsRecursivityConsts.PACK_GROUP, EcsConsts.PROCESSES_GROUP)]
     public interface IOn<T> : IEcsProcess
     {
         void ToRun(EcsSpan targetEntities);
